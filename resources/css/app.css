@@ -1,11 +1,69 @@
-@import 'tailwindcss';
+/* ------------------------------------------------
+   📁 SB Admin - CSS personnalisé DaarasGeo
+   Auteur : Mor
+-------------------------------------------------- */
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+/* Police personnalisée (exemple) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+/* 🔹 Couleur personnalisée */
+.text-custom-indigo {
+    color: #6366f1 !important;
+}
+
+.border-left-custom-indigo {
+    border-left: 0.25rem solid #6366f1 !important;
+}
+
+/* ✅ Transition douce sur hover */
+.transition {
+    transition: all 0.2s ease-in-out;
+}
+
+.transition:hover {
+    transform: scale(1.015);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
+}
+
+/* ✅ Icône alignée proprement */
+.icon-inline {
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+/* ✅ Carte avec en-tête coloré personnalisable */
+.card-header.bg-gradient-primary {
+    background: linear-gradient(90deg, #4e73df 0%, #6c63ff 100%);
+}
+
+/* ✅ Responsive sur petits écrans (cartes collées) */
+@media (max-width: 768px) {
+    .card .card-body {
+        padding: 1rem;
+    }
+
+    .card .h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* 🪄 Boutons personnalisés */
+.btn-light-outline {
+    background-color: white;
+    border: 1px solid #ddd;
+    color: #6c757d;
+}
+
+.btn-light-outline:hover {
+    background-color: #f0f0f0;
+}
+
+/* 🧾 Titre de section */
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    color: #4e73df;
 }
