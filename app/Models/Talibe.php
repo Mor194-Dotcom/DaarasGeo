@@ -37,4 +37,10 @@ class Talibe extends Model
     {
         return $this->hasMany(Historique::class);
     }
+    // Dans app/Models/Talibe.php
+
+    public function alertes()
+    {
+        return $this->hasMany(\App\Models\Alerte::class);
+    }
 }

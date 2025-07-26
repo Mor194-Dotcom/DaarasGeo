@@ -6,21 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Alerte extends Model
 {
-    protected $fillable = ['statut', 'zone_id'];
+    protected $fillable = [
+        'statut',           // 'active', 'en_attente', 'resolue'
+        'zone_id',
+        'utilisateur_id',   // Talibé concerné
+        'latitude',
+        'longitude',
+        'distance',
+        'date'
+    ];
+
+    public function utilisateur() // Talibé ou source de l'alerte
+    {
+        return $this->belongsTo(Utilisateur::class);
+    }
 
     public function zone()
     {
-        return $this->belongsTo(ZoneDelimitee::class, 'zone_id');
+        return $this->belongsTo(ZoneDelimitee::class);
     }
 
-    public function utilisateurs()
+    public function notifications()
     {
-        return $this->belongsToMany(Utilisateur::class, 'notifications')
-            ->withPivot(['lu', 'date_envoi', 'est_critique'])
-            ->withTimestamps();
-    }
-    public function zoneDelimitee()
-    {
-        return $this->belongsTo(ZoneDelimitee::class, 'zone_delimitee_id');
+        return $this->hasMany(Notification::class); // vers destinataires
     }
 }

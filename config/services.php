@@ -34,5 +34,18 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    // Autres services...
+
+    'twilio' => [
+        'sid' => env('TWILIO_ACCOUNT_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+        'from' => env('TWILIO_SENDER'),
+    ],
+    'infobip' => [
+        'key' => env('INFOBIP_API_KEY'),
+        'url' => env('INFOBIP_BASE_URL'),
+        'sender' => env('INFOBIP_SENDER'),
+    ],
+
 
 ];

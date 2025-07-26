@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -6,7 +6,7 @@
     <title>Connexion - DaarasGeo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {{-- Nunito + FontAwesome + Animate.css --}}
+    {{-- Nunito + FontAwesome + Animate.css
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
@@ -146,13 +146,218 @@
             </button>
         </form>
 
-        <p class="text-center text-sm text-gray-600 mt-5">
+        {{--   <p class="text-center text-sm text-gray-600 mt-5">
             Pas encore inscrit ? <a href="{{ route('sign-up') }}" class="text-indigo-600 hover:underline">Créer un
                 compte</a>
         </p>
     </div>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
+</body>
+
+</html>
+ --}}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - DaarasGeo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Fonts + Icons + Bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--front-zise -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Nunito';
+            background-color: #ffffffff;
+        }
+
+        .login-wrapper {
+            display: flex;
+            flex-direction: row;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        .image-side {
+            width: 60%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+            padding: 50;
+            margin: 25%;
+        }
+
+        .image-side img {
+            max-width: 60%;
+            height: 400px;
+            transform: rotate(2deg);
+        }
+
+        .form-side {
+            width: 70%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 30px;
+            padding: 0;
+            background-color: #2f38e4ff;
+        }
+
+        .login-box {
+            max-width: 400px;
+            width: 100%;
+            padding: 2rem;
+
+            .login-box {
+                background-color: #0e3cbcff;
+                /* 💡 remplace par ta couleur souhaitée */
+                border-radius: 16px;
+
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            }
+
+        }
+
+        .btn-indigo {
+            background-color: #ffffffff;
+            color: blue;
+            font-weight: bold;
+            border-radius: 10px;
+            border: none;
+        }
+
+        .btn-indigo:hover {
+            background-color: #80958b20;
+        }
+
+        .form-control:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+        }
+
+        @media (max-width: 768px) {
+            .login-wrapper {
+                flex-direction: column;
+            }
+
+            .image-side {
+                display: none;
+
+            }
+
+            .img-log {
+                width: 100%;
+                height: 100%;
+            }
+
+            .form-side {
+                width: 100%;
+            }
+        }
+
+        h1 {
+            color: #ffffff;
+        }
+
+        .me-2 {
+            max-height: 100px;
+            max-width: 100px;
+            border-radius: 150%;
+        }
+
+        .form-label {
+            color: #ffffff;
+        }
+
+        .fw-semibold {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    @if (session('status'))
+        <div class="alert alert-success text-center fade show">
+            {{ session('status') }}
+        </div>
+    @endif
+
+
+    <div class="login-wrapper">
+        <!-- 📷 Image à gauche -->
+        <div class="image-side">
+            <img class="img-log" src="{{ asset('assets/img/imglogin.png') }}" alt="Illustration DaarasGeo">
+
+
+            <!-- 🔐 Formulaire à droite -->
+            <div class="form-side">
+                <div class="login-box">
+                    <div class="text-center text-indigo fw-bold mb-4">
+                        <img class="me-2" src="assets/img/logo6.png" alt="img5">
+                        <i class="me-1"></i>
+                        <h1> Connexion
+                        </h1>
+                    </div>
+                    @if (session('message'))
+                        <div class="alert alert-success text-center small">{{ session('message') }}</div>
+                    @endif
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger small">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('login.process') }}">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Adresse email</label>
+                            <input type="email" name="email" id="email" class="form-control" required autofocus>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-indigo w-100 py-2">
+                            <i class="fas fa-sign-in-alt me-2"></i> Se connecter
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4">
+                        <a href="{{ route('password.code.form') }}"
+                            class="text-indigo text-decoration-none fw-semibold">
+                            Mot de passe oublié ?
+                        </a>
+                    </div>
+
+                    <p class="text-center text-muted mt-3 mb-0">
+
+                        {{--    <a href="{{ route('sign-up') }}" class="text-indigo fw-semibold text-decoration-none">
+                        Créer un compte
+                    </a> --}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

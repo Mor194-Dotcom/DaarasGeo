@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Enums\TypeTuteurEnum;
 
 class Tuteur extends Model
 {
@@ -16,5 +17,9 @@ class Tuteur extends Model
     public function talibes()
     {
         return $this->hasMany(Talibe::class);
+    }
+    public function getTypeTuteurEnum(): TypeTuteurEnum
+    {
+        return TypeTuteurEnum::from($this->type_tuteur);
     }
 }

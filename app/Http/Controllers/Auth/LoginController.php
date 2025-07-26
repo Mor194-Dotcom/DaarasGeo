@@ -39,7 +39,7 @@ class LoginController extends Controller
             return match ($roleLibelle) {
                 'Administrateur' => redirect()->route('admin.dashboard'),
                 'ResponsableDaara' => redirect()->route('responsableDash'),
-                'Tuteur' => redirect()->route('Tuteur.dashboard'),
+                'Tuteur' => redirect()->route('tuteur.dashboard'),
                 default => abort(403, 'Rôle non reconnu')
             };
         }

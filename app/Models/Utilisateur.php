@@ -9,6 +9,7 @@ class Utilisateur extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'utilisateurs';
     protected $fillable = [
         'nom',
         'prenom',
@@ -32,6 +33,11 @@ class Utilisateur extends Authenticatable
     {
         return $this->hasOne(\App\Models\Administrateur::class, 'utilisateur_id');
     }
+    public function tuteur()
+    {
+        return $this->hasOne(\App\Models\Tuteur::class, 'utilisateur_id');
+    }
+
 
     public function role()
     {
@@ -50,6 +56,26 @@ class Utilisateur extends Authenticatable
     public function isTuteur()
     {
         return $this->role_enum_id === 1;
+    }
+    public function getNumeroValide(): ?string
+    {
+        if ($this->telephone && preg_match('/^\+2217\d{7}$/', $this->telephone)) {
+            return $this->telephone;
+        }
+
+        if ($this->isTuteur() && optional($this->tuteur)->telephone) {
+            return $this->tuteur->telephone;
+        }
+
+        if ($this->isResponsable() && optional($this->responsableDaara)->telephone) {
+            return $this->responsableDaara->telephone;
+        }
+
+        if ($this->isAdmin() && optional($this->administrateur)->telephone) {
+            return $this->administrateur->telephone;
+        }
+
+        return null;
     }
 
 
